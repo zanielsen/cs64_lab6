@@ -97,13 +97,13 @@ SwapCase:
 	
 	move $s0, $a0
 	loop:
-		lbu $t0, 0($s0)
+		lbu $t0, 0($s0) # condition to determine if need to end
 		beq $t0, $zero, done
 		slti $t1, $t0, 65
 		beq $t1, $zero, checkMax
 		j skip
 
-		checkMax:
+		checkMax: # check the uppercase letters
 			slti $t1, $t0, 91
 			beq $t1, $zero, checkLowercase
 			addi $t2, $t0, 32
@@ -130,7 +130,7 @@ SwapCase:
 
 			j skip
 
-		checkLowercase:
+		checkLowercase: # review the lower case letters
 			slti $t1, $t0, 123
 			beq $t1, $zero, skip
 			slti $t1, $t0, 97 # if <61, then =1, so if 0, skip
@@ -159,12 +159,12 @@ SwapCase:
 
 			j skip
 
-		skip:
+		skip: # goes here if not alphabetical
 			addi $s0, $s0, 1
 
-		j loop
+		j loop # continue looping
 	
-	done:
+	done: # finish and restore s0 and ra
 		lw $s0, 0($sp)
 		lw $ra, 4($sp)
 		addiu $sp, $sp, 8
