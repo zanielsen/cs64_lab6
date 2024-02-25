@@ -133,7 +133,7 @@ SwapCase:
 		checkLowercase:
 			slti $t1, $t0, 123
 			beq $t1, $zero, skip
-			slti $t1, $t0, 61 # if <61, then =1, so if 0, skip
+			slti $t1, $t0, 97 # if <61, then =1, so if 0, skip
 			bne $t1, $zero, skip
 			addi $t2, $t0, -32
 
